@@ -1,0 +1,38 @@
+.gameboy
+  .top
+    .onoff
+      span.arrow-left
+      span.onoff-label on/off
+      span.arrow-right
+  .components
+    .screen
+      .battery
+      canvas.display#display
+    .controls
+      .logo
+        .logo-nintendo
+        .logo-gameboy
+      .inputs
+        .dpad
+          .left onmousedown="buttonDown(2)" onmouseup="buttonUp(2)"
+          .up onmousedown="buttonDown(4)" onmouseup="buttonUp(4)"
+          .right onmousedown="buttonDown(1)" onmouseup="buttonUp(1)"
+          .down onmousedown="buttonDown(8)" onmouseup="buttonUp(8)"
+        .buttons
+          .button-b onmousedown="buttonDown(32)" onmouseup="buttonUp(32)"
+          .button-a onmousedown="buttonDown(16)" onmouseup="buttonUp(16)"
+        .selections
+          .select onmousedown="buttonDown(64)" onmouseup="buttonUp(64)"
+          .start onmousedown="buttonDown(128)" onmouseup="buttonUp(128)"
+      .speakers
+        .grill
+        .grill
+        .grill
+        .grill
+        .grill
+        .grill
+
+#title
+#data    
+#cartridge
+#cartridge-data        

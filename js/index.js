@@ -1,0 +1,51 @@
+
+function downloadROM() {
+   var http = new XMLHttpRequest();
+   var pokemonblue = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/163870/PokemonBlue.gb";
+   var zelda = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/163870/LinksAwakening.gb";
+   http.open("GET", zelda);
+   http.responseType = "arraybuffer";
+   http.onreadystatechange = function () {
+      if (http.readyState == 4 && http.status == 200) {
+         loadROM(http.response);
+      }
+   };
+   http.send();
+}
+
+function loadROM(arraybuffer) {
+
+   if (window.gb != undefined) {
+      clearInterval(gb.interval);
+      document.getElementById("display").getContext("2d").setTransform(1, 0, 0, 1, 0, 0);
+   }
+
+   gb = new GameBoy(arraybuffer);
+   gb.displaycanvas = document.getElementById("display").getContext("2d");
+   document.getElementById("display").getContext("2d").scale(1.87, 1.05);
+
+   var data = document.getElementById("data");
+   title = "";
+   for (var i = 0; gb.getAddress(308 + i) != 0; i++) {
+      title += String.fromCharCode(gb.getAddress(308 + i));
+   }
+
+   gb.init();
+}
+
+function pause() {
+   gb.pause();
+   if (gb.paused) {
+      document.getElementById("display").style.opacity = 0.5;
+   } else {
+      document.getElementById("display").style.opacity = 1;
+   }
+}
+
+function buttonDown(key) {
+   gb.keyPressed(key);
+}
+function buttonUp(key) {
+   gb.keyReleased(key);
+}
+downloadROM();
